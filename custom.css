@@ -1,0 +1,418 @@
+/* ── Body background ────────────── */
+
+body,
+.modal-backdrop {
+    background-color: #111827 !important;
+    background-image: linear-gradient(rgba(17,24,39,.5), rgba(17,24,39,.5)), url(./dark-pattern.png) !important;
+    color: #f3f4f6 !important;
+}
+
+/* ── 3D wrapper ─────────────────────────────────────────── */
+.container.main-content {
+    background: linear-gradient(160deg, #7a7a7a 0%, #626262 100%) !important;
+    border-radius: 0 0 10px 10px !important;
+    border: 1px solid #2a2a2a !important;
+    border-top: none !important;
+    overflow: hidden !important;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+    padding-bottom: 16px !important;
+    margin-top: 0 !important;
+    margin-bottom: 24px !important;
+}
+
+table.queue-table {
+    overflow: hidden !important;
+    border-radius: 10px 10px 10px 0 !important;
+}
+
+/* History: top both rounded, bottom both square */
+table.history-table {
+    overflow: hidden !important;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+/* ── Navbar ──────────────────────────────────────────────── */
+.container.main-navbar {
+    margin-bottom: 0 !important;
+    background: transparent !important;
+}
+
+nav.navbar {
+    background: linear-gradient(180deg, #555555 0%, #3a3a3a 100%) !important;
+    border: 1px solid #2a2a2a !important;
+    border-bottom: none !important;
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    border-radius: 6px 6px 0 0 !important;
+}
+
+/* Ensure the navbar stacks above the content wrapper */
+.container.main-navbar {
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+/* Inner collapse clips to the nav's full border-radius */
+.navbar-collapse {
+    border-radius: 0 0 6px 6px !important;
+}
+.navbar-header {
+    border-radius: 6px 6px 0 0 !important;
+}
+
+/* ── Sparkline ───────────────────────────────────────────── */
+li.sparkline-container {
+    background: transparent !important;
+    border: 1px solid rgba(0, 0, 0, 0.45) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+    padding: 0 !important;
+    margin: 9px 10px 9px 4px !important;
+    height: 34px !important;
+    width: 277px !important;
+    overflow: hidden !important;
+    line-height: 0 !important;
+    vertical-align: middle !important;
+}
+
+li.sparkline-container > svg {
+    margin: 0 !important;
+    vertical-align: top !important;
+    display: block !important;
+}
+
+/* Navbar links — #e8e8e8 on #444 = 6.9:1 ✓ (removed opacity reduction) */
+.navbar-nav > li > a {
+    color: #e8e8e8 !important;
+    opacity: 1 !important;
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    text-decoration: underline;
+}
+
+/* ── Focus indicators — WCAG 2.4.7 ──────────────────────── */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+[tabindex]:focus {
+    outline: 2px solid #7cb8ff !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 4px rgba(124, 184, 255, 0.25) !important;
+}
+
+/* ── Tab bar ─────────────────────────────────────────────── */
+.history-queue-swicher {
+    background: linear-gradient(180deg, #5a5a5a 0%, #484848 100%) !important;
+    padding: 6px 6px 0 !important;
+    box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Active tab — #222 on #ddd = 10.7:1 ✓ */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+    background-color: #dddddd !important;
+    color: #222222 !important;
+    font-weight: 600;
+}
+
+/* Inactive tab — #f0f0f0 on #484848 = 6.8:1 ✓ */
+.nav-tabs > li > a {
+    color: #f0f0f0 !important;
+}
+
+.nav-tabs > li > a:hover {
+    background-color: #5e5e5e !important;
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+/* ── Table rows ──────────────────────────────────────────── */
+.table {
+    border: none !important;
+    margin-bottom: 0 !important;
+}
+
+/* Odd rows — #f3f4f6 on #424242 = 8.9:1 ✓ */
+.table-striped > tbody > tr:nth-child(odd),
+.table-striped > tbody > tr:nth-child(odd) > td {
+    background: #424242 !important;
+    color: #f3f4f6 !important;
+}
+
+/* Even rows — #f3f4f6 on #505050 = 7.5:1 ✓ */
+.table-striped > tbody > tr:nth-child(even),
+.table-striped > tbody > tr:nth-child(even) > td {
+    background: #505050 !important;
+    color: #f3f4f6 !important;
+}
+
+/* Hover — #ffffff on #5a5a5a = 6.3:1 ✓ */
+.table > tbody > tr:hover,
+.table > tbody > tr:hover > td {
+    background: #5a5a5a !important;
+    color: #ffffff !important;
+}
+
+/* ── Progress bar ────────────────────────────────────────── */
+html body .progress {
+    background-color: #c8c8c8 !important;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.35) !important;
+    border-radius: 4px !important;
+    border: 1px solid #3a3a3a !important;
+    overflow: hidden !important;
+    margin-bottom: 0 !important;
+    height: 24px !important;
+    position: relative !important;
+}
+
+/* Fill bar — vivid green, same height as track */
+html body .progress-bar {
+    background-color: #43a047 !important;
+    background-image: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%, transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%, transparent
+    ) !important;
+    background-size: 20px 20px !important;
+    border-radius: 3px !important;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+    height: 24px !important;
+    float: left !important;
+    transition: width 0.6s ease;
+}
+
+html body .progress > span,
+html body .progress-bar > span {
+    color: #1a1a1a !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.8) !important;
+    background: none !important;
+    padding-right: 8px !important;
+    line-height: 24px !important;
+}
+
+/* Percentage inside the fill — white on green, original font size */
+html body .progress strong,
+html body .progress i {
+    color: #ffffff !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Vertically center progress bar within its table cell */
+td.progress-indicator {
+    vertical-align: middle !important;
+}
+
+html body td.timeleft {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-size: 13px !important;
+    color: #e8eaf0 !important;
+    background: transparent !important;
+    vertical-align: middle !important;
+    text-align: right !important;
+    padding: 4px 6px !important;
+}
+
+/* ── Info container wrapper ──────────────────────────────── */
+.info-container {
+    background: rgba(0, 0, 0, 0.15) !important;
+    border-radius: 0 0 6px 6px !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    padding: 6px 8px !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+.info-container.history-info {
+    border-radius: 0 0 6px 6px !important;
+    margin-top: 0 !important;
+}
+
+/* Queue / history tab content area */
+.queue,
+.history {
+    padding: 8px !important;
+}
+
+/* ── Code-block values ───────────────────────────────────── */
+.info-container-box {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-size: 12px !important;
+    color: #e0e0e0 !important;
+    background: rgba(0, 0, 0, 0.28) !important;
+    border: 1px solid rgba(0, 0, 0, 0.35) !important;
+    border-radius: 4px !important;
+    padding: 3px 8px !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    margin-right: 6px !important;
+}
+
+.badge {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    color: #e0e0e0 !important;
+    background: #2e2e2e !important;
+    border: 1px solid #1a1a1a !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+}
+
+.dropdown-menu {
+    background-color: #444444 !important;
+    border: 1px solid #222 !important;
+    border-radius: 4px !important;
+}
+
+.dropdown-menu > li > a {
+    color: #f0f0f0 !important;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    background-color: #5a5a5a !important;
+    color: #ffffff !important;
+    text-decoration: underline;
+}
+
+input[type="checkbox"] {
+    accent-color: #4caf50;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+
+h2 {
+    color: #f3f4f6 !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+h2 small {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-size: 12px !important;
+    color: #e0e0e0 !important;
+    background: #2e2e2e !important;
+    border: 1px solid #1a1a1a !important;
+    border-radius: 4px !important;
+    padding: 2px 8px !important;
+    margin-left: 8px !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.35) !important;
+    vertical-align: middle !important;
+}
+
+.text-muted {
+    color: #b8b8b8 !important;
+}
+
+.history-completed .status::before,
+span[style*="#5cb85c"]::before {
+    content: "✓ ";
+    font-weight: bold;
+}
+
+/* #ff6b6b on dark rows = 6.4:1 ✓ */
+.retry-buttontext,
+.history-failed-download td.status,
+.queue-error-info {
+    color: #ff6b6b !important;
+    font-weight: 600;
+}
+
+.processing-download .status {
+    color: #ffcc44 !important;
+    font-weight: 600;
+}
+
+/* ── Buttons & form controls ─────────────────────────────── */
+.btn {
+    border-radius: 4px !important;
+}
+.form-control,
+select.form-control,
+input.form-control,
+input[type="text"],
+input[type="search"],
+input[type="number"] {
+    border-radius: 4px !important;
+}
+.input-group .form-control:first-child,
+.input-group-addon:first-child {
+    border-radius: 4px 0 0 4px !important;
+}
+.input-group .form-control:last-child,
+.input-group-addon:last-child,
+.input-group-btn:last-child > .btn {
+    border-radius: 0 4px 4px 0 !important;
+}
+
+/* ── Pagination — bottom corners only (matches melted layout) */
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+    border-radius: 0 0 0 6px !important;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+    border-radius: 0 0 6px 0 !important;
+}
+.pagination > li > a,
+.pagination > li > span {
+    background-color: #505050 !important;
+    border-color: #2a2a2a !important;
+    color: #f0f0f0 !important;
+}
+.pagination > li.active > a,
+.pagination > li.active > span {
+    background-color: #3a3a3a !important;
+    border-color: #1a1a1a !important;
+    color: #ffffff !important;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover {
+    background-color: #5a5a5a !important;
+    color: #ffffff !important;
+}
+
+/* ── Multioperations selector — same as pagination ─────── */
+.multioperations-selector {
+    border-radius: 0 0 6px 6px !important;
+    border-color: #2a2a2a !important;
+}
+
+/* ── Links — underlined for non-color distinction ────────── */
+a {
+    text-decoration: underline;
+}
+
+/* Suppress underline for icon-only / button-style links */
+a.hover-button,
+.navbar-nav a,
+.nav-tabs a,
+.dropdown-toggle,
+.dropdown-menu a {
+    text-decoration: none !important;
+}
+
+a.hover-button:hover,
+a.hover-button:focus {
+    text-decoration: none !important;
+    opacity: 1 !important;
+}
