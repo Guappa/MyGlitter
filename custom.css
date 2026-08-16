@@ -1,5 +1,14 @@
-/* ── Body background ────────────── */
+/* ══════════════════════════════════════════════════════════
+   Guapo — WCAG 2 AA compliant theme overrides
+   Contrast ratios noted inline. Target: 4.5:1 normal text,
+   3:1 large text / UI components.
 
+   NOTE: glitter.css contains `* { border-radius: 0 !important }`
+   so every border-radius rule here must use !important to take effect.
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Body background — matches bigscreen.info ────────────── */
+/* #f3f4f6 on #111827 = 15.3:1 ✓ */
 body,
 .modal-backdrop {
     background-color: #111827 !important;
@@ -8,21 +17,28 @@ body,
 }
 
 /* ── 3D wrapper ─────────────────────────────────────────── */
+/* glitter.css: `* { border-radius: 0 !important }` — all radius needs !important */
 .container.main-content {
     background: linear-gradient(160deg, #7a7a7a 0%, #626262 100%) !important;
-    border-radius: 0 0 10px 10px !important;
-    border: 1px solid #2a2a2a !important;
+    border-radius: 0 0 14px 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
     border-top: none !important;
     overflow: hidden !important;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.6),
-        0 2px 4px rgba(0, 0, 0, 0.4),
-        inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
     padding-bottom: 16px !important;
     margin-top: 0 !important;
     margin-bottom: 24px !important;
 }
 
+/* border-radius on td/th is ignored by the CSS spec when
+   border-collapse:collapse is set (glitter.css uses it).
+   The fix: apply overflow:hidden + border-radius to the TABLE element
+   itself — this clips cell backgrounds at the corners. */
+/* overflow:hidden + border-radius on the TABLE element clips cell
+   backgrounds at the corners (td/th border-radius is ignored by spec
+   with border-collapse:collapse). Top corners rounded to match the
+   container card; bottom stays square — pagination/search sits below. */
+/* Queue: top both rounded, bottom-right rounded, bottom-left square */
 table.queue-table {
     overflow: hidden !important;
     border-radius: 10px 10px 10px 0 !important;
@@ -35,9 +51,16 @@ table.history-table {
 }
 
 /* ── Navbar ──────────────────────────────────────────────── */
+/* Dark.css sets `.container { background-color: #727272 }` which hits
+   .container.main-navbar too — must override to transparent so the
+   body background shows through the nav's rounded corners. */
 .container.main-navbar {
     margin-bottom: 0 !important;
     background: transparent !important;
+    /* Zero the Bootstrap container padding so the nav bar's edges line up
+       with the content frame below instead of sitting inset from it. */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 nav.navbar {
@@ -48,6 +71,8 @@ nav.navbar {
         0 4px 12px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
     border-radius: 6px 6px 0 0 !important;
+    /* No overflow:hidden — it clips position:absolute dropdowns.
+       border-radius still rounds the nav's own background correctly. */
 }
 
 /* Ensure the navbar stacks above the content wrapper */
@@ -65,6 +90,22 @@ nav.navbar {
 }
 
 /* ── Sparkline ───────────────────────────────────────────── */
+/* Sunken inset card — same family as info-container-box.
+   No vertical padding so the SVG can touch the edges.
+   margin-right creates the gap between this and the speed button. */
+/* Peity renders the SVG at exactly height:32px (from glitter.js).
+   Lock the container to that height so it doesn't stretch the navbar.
+   margin: 9px auto centres it in Bootstrap's default 50px navbar height.
+   overflow:hidden clips cleanly; line-height:0 kills inline whitespace. */
+/* Glitter's own CSS: `.sparkline-container svg { margin: 10px 15px 8px }`.
+   Override that margin to 0 so the SVG fills the container cleanly.
+   Keep container height at 34px (SVG is 32px + 1px border each side).
+   No width constraint — let Peity size naturally so live updates work. */
+/* Peity calls this.$el.hide().after(svg) — the SVG is a sibling of span.sparkline,
+   NOT a child. It's a direct child of li.sparkline-container with class "peity".
+   Glitter's CSS: `.sparkline-container svg { margin: 10px 15px 8px }` causes
+   15px left/right gap and 10px top gap. Override to 0.
+   Width: 277px = 275px SVG + 2px border (box-sizing: border-box). */
 li.sparkline-container {
     background: transparent !important;
     border: 1px solid rgba(0, 0, 0, 0.45) !important;
@@ -164,10 +205,12 @@ select:focus,
 }
 
 /* ── Progress bar ────────────────────────────────────────── */
+/* Track: light gray so it pops against the container gradient
+   (#7a7a7a→#626262). Using a dark or mid-gray track blends in. */
 html body .progress {
     background-color: #c8c8c8 !important;
     box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.35) !important;
-    border-radius: 4px !important;
+    border-radius: 7px !important;
     border: 1px solid #3a3a3a !important;
     overflow: hidden !important;
     margin-bottom: 0 !important;
@@ -186,13 +229,16 @@ html body .progress-bar {
         transparent 75%, transparent
     ) !important;
     background-size: 20px 20px !important;
-    border-radius: 3px !important;
+    border-radius: 6px !important;
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
     height: 24px !important;
     float: left !important;
     transition: width 0.6s ease;
 }
 
+/* Size text — right-aligned absolute overlay sitting on the TRACK.
+   Use dark text: the track is light (#c8c8c8) so this gives ~11:1 contrast.
+   For the rare case the fill covers it, a subtle white halo keeps it legible. */
 html body .progress > span,
 html body .progress-bar > span {
     color: #1a1a1a !important;
@@ -218,6 +264,9 @@ td.progress-indicator {
     vertical-align: middle !important;
 }
 
+/* ── Timeleft column ─────────────────────────────────────── */
+/* th is inline width:85px. Keep font size legible — 13px fills the
+   column without overflowing. .row-wrap-text handles ellipsis. */
 html body td.timeleft {
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
     font-size: 13px !important;
@@ -229,42 +278,68 @@ html body td.timeleft {
 }
 
 /* ── Info container wrapper ──────────────────────────────── */
+/* Queue status row: no wrapper frame — the chips inside stand on their own
+   against the container gradient (5.1.0's row structure made the old boxed
+   wrapper read as a redundant box-in-box). */
 .info-container {
-    background: rgba(0, 0, 0, 0.15) !important;
-    border-radius: 0 0 6px 6px !important;
-    border: 1px solid rgba(0, 0, 0, 0.2) !important;
-    padding: 6px 8px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
     margin-bottom: 8px !important;
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
 }
 
+/* History info keeps the boxed wrapper — flat top (abuts multioperations-selector),
+   rounded bottom — since the base rule above is now frameless. */
 .info-container.history-info {
+    background: rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
     border-radius: 0 0 6px 6px !important;
+    padding: 6px 8px !important;
     margin-top: 0 !important;
 }
 
-/* Queue / history tab content area */
+/* Queue / history tab content area — transparent so the frame's gradient
+   is one continuous surface (Dark.css paints .container #727272, which
+   otherwise shows as a flat panel lighter than the gradient beneath it). */
 .queue,
-.history {
+.history,
+.queue-messages {
     padding: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Queue row hover feedback */
+.queue-item {
+    transition: background-color 0.12s ease;
+}
+.queue-item:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* ── Code-block values ───────────────────────────────────── */
+/* Sunken inset look — dark semi-transparent so it sinks into the
+   gray container rather than popping out. #e0e0e0 on ~#4d4d4d = 7.1:1 ✓ */
 .info-container-box {
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
     font-size: 12px !important;
     color: #e0e0e0 !important;
     background: rgba(0, 0, 0, 0.28) !important;
-    border: 1px solid rgba(0, 0, 0, 0.35) !important;
-    border-radius: 4px !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
     padding: 3px 8px !important;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
     margin-right: 6px !important;
 }
 
+/* ── Badges — #e0e0e0 on #2e2e2e = 9.5:1 ✓ ─────────────── */
 .badge {
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
     color: #e0e0e0 !important;
@@ -275,6 +350,7 @@ html body td.timeleft {
     padding: 2px 6px !important;
 }
 
+/* ── Dropdown menu — #f0f0f0 on #444 = 7.6:1 ✓ ─────────── */
 .dropdown-menu {
     background-color: #444444 !important;
     border: 1px solid #222 !important;
@@ -292,6 +368,7 @@ html body td.timeleft {
     text-decoration: underline;
 }
 
+/* ── Green checkboxes — WCAG 1.4.11: 3:1 against bg ─────── */
 input[type="checkbox"] {
     accent-color: #4caf50;
     width: 14px;
@@ -299,6 +376,7 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+/* ── h2 — #f0f0f0 on bg = passes ✓ ──────────────────────── */
 h2 {
     color: #f3f4f6 !important;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
@@ -319,10 +397,14 @@ h2 small {
     vertical-align: middle !important;
 }
 
+/* ── Text-muted — raised to meet 4.5:1 ──────────────────── */
+/* #b8b8b8 on #424242 = 4.6:1 ✓ */
 .text-muted {
     color: #b8b8b8 !important;
 }
 
+/* ── Status colors — not color alone (WCAG 1.4.1) ────────── */
+/* Completed — green + checkmark prefix */
 .history-completed .status::before,
 span[style*="#5cb85c"]::before {
     content: "✓ ";
@@ -337,14 +419,22 @@ span[style*="#5cb85c"]::before {
     font-weight: 600;
 }
 
+/* Verifying/in-progress — amber */
+/* #ffcc44 on dark rows = 9.1:1 ✓ */
 .processing-download .status {
     color: #ffcc44 !important;
     font-weight: 600;
 }
 
 /* ── Buttons & form controls ─────────────────────────────── */
+/* glitter.css `* { border-radius: 0 !important }` zeroed these */
 .btn {
     border-radius: 4px !important;
+}
+/* Navbar button groups read as a segmented control — a visible divider
+   between the joined buttons instead of one blended block. */
+.main-navbar .btn-group > .btn {
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
 }
 .form-control,
 select.form-control,
@@ -398,6 +488,7 @@ input[type="number"] {
 }
 
 /* ── Links — underlined for non-color distinction ────────── */
+/* WCAG 1.4.1: links must be distinguishable without color */
 a {
     text-decoration: underline;
 }
